@@ -649,6 +649,37 @@ Stitch's output is the design source of truth.**
     - §7 Animation (150-300ms, reduced-motion support)
 13. Fix any issues found in the QA pass
 
+#### Phase 4 — Visual QA with Playwright
+
+After the code QA pass, use **Playwright MCP** to visually verify the website
+looks correct in a real browser:
+
+14. **Open the page:** Call `mcp__playwright__browser_navigate` to open the
+    local HTML file or dev server URL
+15. **Take a full screenshot:** Call `mcp__playwright__browser_take_screenshot`
+    to capture the rendered page
+16. **Visual inspection:** Review the screenshot and verify:
+    - Layout matches the Stitch design direction
+    - Colors, fonts, and spacing look correct
+    - No broken elements, overlapping text, or missing images
+    - RTL direction renders properly (if applicable)
+    - Cards, grids, and sections are aligned
+    - Hero section gradient and effects render correctly
+17. **Test responsive:** Call `mcp__playwright__browser_resize` to test at
+    different viewport widths (375px mobile, 768px tablet, 1440px desktop)
+    and take a screenshot at each size
+18. **Test interactions:** Use `mcp__playwright__browser_click` and
+    `mcp__playwright__browser_hover` to verify:
+    - Hover effects on cards and buttons work
+    - Navigation links scroll smoothly
+    - Animations trigger correctly
+19. **Fix visual issues:** If any visual problems are found in the screenshots,
+    fix the code and re-verify with Playwright until it looks right
+20. **Close browser:** Call `mcp__playwright__browser_close` when done
+
+**This phase ensures the final result actually LOOKS correct, not just that
+the code follows best practices.**
+
 #### If Stitch Times Out (60 attempts / 15 minutes)
 
 - Try `generate_screen_from_text` ONE more time with a simpler prompt
